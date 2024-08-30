@@ -70,6 +70,37 @@
 
 
 
+<script>
+  document.addEventListener('DOMContentLoaded', function () {
+  function updateTotalPoints() {
+    const homeworkTableRows = document.querySelectorAll('.homework-points tbody tr');
+    const totalPointsCells = document.querySelectorAll('.total-points tbody tr td');
 
+    // Initialize totals for each student
+    let totals = [0, 0, 0]; // Aman, Badal, YashRaj
+
+    homeworkTableRows.forEach(row => {
+      const cells = row.querySelectorAll('td');
+      cells.forEach((cell, index) => {
+        if (index > 0) { // Skip the date column
+          const value = cell.textContent.trim();
+          if (value !== '-') {
+            totals[index - 1] += parseInt(value, 10);
+          }
+        }
+      });
+    });
+
+    // Update the total points table
+    totalPointsCells.forEach((cell, index) => {
+      cell.textContent = totals[index];
+    });
+  }
+
+  // Call the function to update totals on page load
+  updateTotalPoints();
+});
+
+</script>
 </body>
 </html>
